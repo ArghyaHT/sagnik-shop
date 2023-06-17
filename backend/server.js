@@ -1,8 +1,8 @@
 import express from "express"
 import dotenv from "dotenv"
 import connectDB from "./db/db.js"
-import {products} from "./products.js"
 import productRoute from "./routes/productRoute.js"
+import { notFound,errorHandler } from "./middleware/errorMiddleware.js"
 import cors from "cors"
 
 dotenv.config()
@@ -18,6 +18,9 @@ app.use("/api/product",productRoute)
 app.get("/", (req,res) => {
     res.json("helo")
 })
+
+app.use(notFound)
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 8000
 

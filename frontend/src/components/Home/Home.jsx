@@ -1,26 +1,27 @@
-import React,{useState,useEffect} from 'react'
+import React,{useEffect} from 'react'
 import "./Home.css"
 import Product from '../Product/Product'
-import axios from "axios"
+import Loader from '../Loader'
+import {useSelector,useDispatch} from "react-redux"
+import { getProductsAction } from '../../actions/productActions'
 
 const Home = () => {
-    const [products, setProduct] = useState([])
+ 
+    const getProducts = useSelector(state => state.getProducts)
+    const {products,loading,error} = getProducts
 
+    const dispatch = useDispatch()
+    
     useEffect(() => {
-        const getProducts = async () => {
-            const {data} = await axios.get("http://localhost:3000/api/product")
-            setProduct(data)
-        }
-
-        getProducts()
-    },[])
-
+        dispatch(getProductsAction())
+    },[dispatch])
     console.log(products)
-
     return (
         <main className='home'>
+            {loading && <Loader/>}
+            {error && <h1>{error}</h1>}
             {
-                products.map((product) => (
+                products?.map((product) => (
                     <div key={product._id}>
                         <Product product={product}/>
                     </div>

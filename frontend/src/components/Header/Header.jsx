@@ -1,16 +1,17 @@
 import React from 'react'
 import "./Header.css"
+import { Link } from 'react-router-dom'
 
 const Header = () => {
   return (
     <>
     <div className='header'>
-        <p>Sagnik-Shop</p>
+        <Link to="/" style={{fontSize:"20px",textDecoration:"none",color:"black"}}><p>Sagnik-Shop</p></Link>
 
         <div>
-            <p>Cart</p>
+            <Link to="/cart" style={{fontSize:"16px",textDecoration:"none",color:"black"}}><p>Cart</p></Link>
             <div>
-                <p>Sign-In</p>
+                <Link to="" style={{fontSize:"16px",textDecoration:"none",color:"black"}}><p>Sign-In</p></Link>
             </div>
         </div>
     </div>
