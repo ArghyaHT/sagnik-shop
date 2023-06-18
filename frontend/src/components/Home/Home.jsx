@@ -15,7 +15,6 @@ const Home = () => {
     useEffect(() => {
         dispatch(getProductsAction())
     },[dispatch])
-    console.log(products)
     return (
         <main className='home'>
             {loading && <Loader/>}

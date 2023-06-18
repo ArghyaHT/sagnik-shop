@@ -2,6 +2,7 @@ import express from "express"
 import dotenv from "dotenv"
 import connectDB from "./db/db.js"
 import productRoute from "./routes/productRoute.js"
+import userRoute from "./routes/userRoute.js"
 import { notFound,errorHandler } from "./middleware/errorMiddleware.js"
 import cors from "cors"
 
@@ -12,8 +13,10 @@ connectDB()
 const app = express()
 
 app.use(cors())
+app.use(express.json()); 
 
 app.use("/api/product",productRoute)
+app.use("/api/user",userRoute)
 
 app.get("/", (req,res) => {
     res.json("helo")

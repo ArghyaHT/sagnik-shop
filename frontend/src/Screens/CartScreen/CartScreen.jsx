@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react'
 import "./CartScreen.css"
-import {useParams,useLocation} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import { RiDeleteBin5Fill } from 'react-icons/ri'
 import {useDispatch,useSelector} from 'react-redux'
 import { addToCart, removeToCart } from '../../actions/cartAction'
@@ -10,12 +10,25 @@ const CartScreen = () => {
   const cart = useSelector(state => state.cart)
   const {cartItems} = cart
 
+  const userLogin = useSelector(state => state.userLogin)
+  const {userInfo} = userLogin
+
+  const dispatch = useDispatch()
+
   const deleteItem = (id) => {
     dispatch(removeToCart(id))
   }
 
+  const navigate = useNavigate()
+
   const checkoutHandler = () => {
-    console.log("hello")
+    if(userInfo){
+      navigate("/shipping")
+    }else{
+      navigate("/signin")
+    }
+    
+    // navigate("/shipping")
   }
   return (
     <>
@@ -25,7 +38,7 @@ const CartScreen = () => {
         <div className='cart-content-box'>
           <div className='left-cart'>
            {
-            cartItems && cartItems.map((item) => (<div className='cart-content' key={item._id}>
+            cartItems && cartItems.length > 0 ? cartItems.map((item) => (<div className='cart-content' key={item._id}>
 
               <div>
                 <img src={item.image} alt={item.name} />
@@ -50,7 +63,10 @@ const CartScreen = () => {
                 <RiDeleteBin5Fill />
               </div>
             </div>
-            ))
+            )) : (<p style={{
+              marginTop:"20px",
+              fontSize:"30px",
+            }}>Please Add Items {": ("}</p>)
            }
             
           </div>
@@ -60,9 +76,9 @@ const CartScreen = () => {
                 <h2>SubTotal ({cartItems.length}) items</h2>
                 <p>price : {cartItems.reduce((acc,item) => acc + item.price*item.qty ,0)}</p>
                 <button 
-                disabled={true}
+                disabled={cartItems.length === 0}
                 onClick={checkoutHandler}
-                >Proceed To Checkout</button>
+                >{ userInfo ? "Proceed To Checkout" : "SignIn to checkout"}</button>
             </div>
           </div>
 

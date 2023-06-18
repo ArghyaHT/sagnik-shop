@@ -1,6 +1,7 @@
 import React from 'react'
 import "./Product.css"
 import { Link } from 'react-router-dom'
+import Rating from '../Rating'
 
 const Product = ({product}) => {
   return (
@@ -11,7 +12,7 @@ const Product = ({product}) => {
         </div>
         <div>
         <Link to={`/product/${product._id}`}><p>{product.name}</p></Link>
-          <p>{product.rating}</p>
+          <Rating value={product.rating}/>
           <p>{product.numReviews} reviews</p>
           <p>Brand: {product.brand}</p>
           <h2>${product.price}</h2>
