@@ -7,24 +7,8 @@ import { addToCart, removeToCart } from '../../actions/cartAction'
 
 const CartScreen = () => {
 
-  // const {id:productId} = useParams()
-
-  // const location = useLocation();
   const cart = useSelector(state => state.cart)
   const {cartItems} = cart
-
-  // // Accessing pathname and search query parameters
-  // const pathname = location.pathname;
-  // const searchParams = new URLSearchParams(location.search);
-  // const qty = searchParams.get('qty');
-
-  const dispatch = useDispatch()
-
-  // useEffect(() => {
-    // if(productId){
-    //   dispatch(addToCart(Number(qty),productId))
-    // }
-  // },[dispatch,productId,qty])
 
   const deleteItem = (id) => {
     dispatch(removeToCart(id))
