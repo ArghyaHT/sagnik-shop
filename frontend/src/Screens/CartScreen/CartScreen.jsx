@@ -29,6 +29,10 @@ const CartScreen = () => {
   const deleteItem = (id) => {
     dispatch(removeToCart(id))
   }
+
+  const checkoutHandler = () => {
+    console.log("hello")
+  }
   return (
     <>
       <main className='cart-screen'>
@@ -71,7 +75,10 @@ const CartScreen = () => {
             <div className='total'>
                 <h2>SubTotal ({cartItems.length}) items</h2>
                 <p>price : {cartItems.reduce((acc,item) => acc + item.price*item.qty ,0)}</p>
-                <button>Proceed To Checkout</button>
+                <button 
+                disabled={true}
+                onClick={checkoutHandler}
+                >Proceed To Checkout</button>
             </div>
           </div>
 
