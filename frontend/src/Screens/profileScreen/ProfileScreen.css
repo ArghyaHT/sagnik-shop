@@ -54,3 +54,35 @@
     color: green;
     font-weight: bold;
 }
+
+/* .order-btn{
+    background-color: rgba(255, 94, 0, 0.437) !important;
+    width: 100% !important;
+    border-radius:0px inherit !important;
+}
+
+.order-btn:hover{
+    background-color: rgba(255, 0, 0, 0.528) !important;
+} */
+
+.table{
+    border: 1px solid rgba(0,0,0,0.4);
+    padding: 0px !important;
+    margin-top: 20px;
+}
+
+thead{
+    background-color: rgba(59, 59, 177, 0.695);
+    height: 35px;
+    margin: 0px !important;
+}
+
+tbody tr th,td{
+    border: 1px solid rgba(0,0,0,0.4) !important;
+    height: 40px;
+    padding-inline: 20px;
+}
+
+tbody tr button{
+    padding-inline: 30px;
+}

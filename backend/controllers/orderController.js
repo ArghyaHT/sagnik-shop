@@ -80,5 +80,17 @@ const updateOrderToPaid = asyncHandler(async(req,res) => {
   }
 })
 
+// @desc: GET ALL ORDERS
+// @route: GET
+// @access: PRIVATE
 
-export {createOrder,getOrderById,updateOrderToPaid}
+const getAllOrders = asyncHandler(async(req,res) => {
+   const orders = await Order.find({user: req.user._id})
+   if(orders){
+    res.status(201).json(orders)
+   }else{
+    throw new Error("No Orders has been made")
+   }
+})
+
+export {createOrder,getOrderById,updateOrderToPaid,getAllOrders}

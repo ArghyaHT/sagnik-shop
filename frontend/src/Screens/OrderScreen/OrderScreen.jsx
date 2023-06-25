@@ -92,10 +92,12 @@ const OrderScreen = () => {
                     <div className='right'>
                         <h1>Order Summary</h1>
 
-                        <div>
+                        {
+                            order && order.orderItems &&<div>
                             <p>Items</p>
-                            <p>${order.orderItems.reduce((acc,item) => item.qty*item.price + acc, 0)}</p>
+                            <p>${order && order.orderItems.reduce((acc,item) => item.qty*item.price + acc, 0)}</p>
                         </div>
+                        }
 
                         <div>
                             <p>Shipping</p>
