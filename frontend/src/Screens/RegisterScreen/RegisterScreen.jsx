@@ -4,6 +4,7 @@ import "./RegisterScreen.css"
 import { useSelector, useDispatch } from 'react-redux'
 import { userRegisterAction } from '../../actions/userAction'
 import Loader from "../../components/Loader"
+import axios from 'axios'
 
 const RegisterScreen = () => {
 
@@ -16,22 +17,47 @@ const RegisterScreen = () => {
     const userRegister = useSelector(state => state.userRegister)
     const { userInfo, loading, error } = userRegister
     const navigate = useNavigate()
-    
+
     useEffect(() => {
         if (userInfo) {
-          navigate("/");
+            navigate("/");
         }
-      }, [navigate, userInfo]);
+    }, [navigate, userInfo]);
+
+    const [uploading, setUploading] = useState(false)
+    const [image, setImage] = useState("")
+
+    const uploadFileHandler = async (e) => {
+        const file = e.target.files[0]
+        const formData = new FormData()
+        formData.append('image', file)
+        setUploading(true)
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+
+            const { data } = await axios.post('http://localhost:3000/api/upload', formData, config)
+
+            setImage(data)
+            setUploading(false)
+        } catch (error) {
+            console.log(error)
+            setUploading(false)
+        }
+    }
 
     const dispatch = useDispatch()
 
     const submitHandler = (e) => {
         e.preventDefault()
-        if (name && email && password && confirmPassword) {
+        if (name && email && password && confirmPassword && image) {
             if (password !== confirmPassword) {
                 setMessage("Password Donot Match")
             } else {
-                dispatch(userRegisterAction(name, email, password))
+                dispatch(userRegisterAction(name, email, password, image))
             }
         } else {
             setMessage("Please Fill all the Fields")
@@ -63,6 +89,21 @@ const RegisterScreen = () => {
                         />
                     </div>
 
+                    <div>
+                        <label htmlFor="">Image</label>
+                        <input
+                            type="text"
+                            placeholder='Image'
+                            value={image}
+                            onChange={(e) => setImage(e.target.value)}
+                        />
+                    </div>
+                        <input
+                            type="file"
+                            name="choose file"
+                            id=""
+                            onChange={uploadFileHandler}
+                        />
                     <div>
                         <label htmlFor="">Password</label>
                         <input

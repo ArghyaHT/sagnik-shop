@@ -7,6 +7,7 @@ import Loader from '../../components/Loader'
 import { getAllOrdersAction } from '../../actions/orderAction'
 import { ImCross } from 'react-icons/im'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 const ProfileScreen = () => {
 
@@ -46,12 +47,37 @@ const ProfileScreen = () => {
 
   }, [dispatch, userInfo, navigate, user])
 
+  const [uploading, setUploading] = useState(false)
+  const [image, setImage] = useState("")
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('image', file)
+    setUploading(true)
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+
+      const { data } = await axios.post('http://localhost:3000/api/upload', formData, config)
+
+      setImage(data)
+      setUploading(false)
+    } catch (error) {
+      console.log(error)
+      setUploading(false)
+    }
+  }
+
   const submitHandler = (e) => {
     e.preventDefault()
     if (password !== confirmpassword) {
       setMessage("Password donot Match")
     } else {
-      dispatch(userUpdateAction({ _id: user._id, name, email, password }))
+      dispatch(userUpdateAction({ _id: user._id, name, image, email, password }))
     }
   }
 
@@ -80,6 +106,22 @@ const ProfileScreen = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
+
+            <div>
+              <label htmlFor="">Image</label>
+              <input
+                type="text"
+                placeholder='Image'
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+              />
+            </div>
+              <input
+                type="file"
+                name="choose file"
+                id=""
+                onChange={uploadFileHandler}
+              />
 
             <div>
               <label htmlFor="">Password:</label>
@@ -135,8 +177,8 @@ const ProfileScreen = () => {
                         <th>{order._id}</th>
                         <td>{`${order.createdAt}`.substring(0, 10)}</td>
                         <td>${order.totalPrice}</td>
-                        <td>{ order.paidAt ? `${order.paidAt}`.substring(0, 10) : <ImCross style={{color:"red",marginLeft:"10px"}}/>}</td>
-                        <td>{ order.deliveredAt ? `${order.deliveredAt}`.substring(0, 10) : <ImCross style={{color:"red",marginLeft:"15px"}}/>}</td>
+                        <td>{order.paidAt ? `${order.paidAt}`.substring(0, 10) : <ImCross style={{ color: "red", marginLeft: "10px" }} />}</td>
+                        <td>{order.deliveredAt ? `${order.deliveredAt}`.substring(0, 10) : <ImCross style={{ color: "red", marginLeft: "15px" }} />}</td>
                         <Link to={`/order/${order._id}`}><button className='order-btn'>Details</button></Link>
                       </tr>
                     )

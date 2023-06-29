@@ -19,6 +19,7 @@ const loginUser = asyncHandler(async (req, res) => {
             name: loginUser.name,
             email: loginUser.email,
             isAdmin: loginUser.isAdmin,
+            image: loginUser.image,
             token: generateToken(loginUser._id)
         })
     } else {
@@ -33,7 +34,7 @@ const loginUser = asyncHandler(async (req, res) => {
 // @access: public
 
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password } = req.body
+    const { name, email, password,image } = req.body
 
     const existUser = await User.findOne({ email })
 
@@ -42,7 +43,7 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new Error("User already Exist")
     }
 
-    const createdUser = await User.create({ name, email, password })
+    const createdUser = await User.create({ name, email, password,image })
     if (createdUser) {
         res.status(200)
         res.json({
@@ -50,7 +51,8 @@ const registerUser = asyncHandler(async (req, res) => {
             name: createdUser.name,
             email: createdUser.email,
             isAdmin: createdUser.isAdmin,
-            token: generateToken(createdUser._id)
+            token: generateToken(createdUser._id),
+            image: createdUser.image
         })
     } else {
         res.status(400)
@@ -90,6 +92,7 @@ const profileUpdateUser = asyncHandler(async (req, res) => {
     if (user) {
         user.name = req.body.name || user.name
         user.email = req.body.email || user.email
+        user.image = req.body.image || user.image
         if (req.body.password) {
             user.password = req.body.password
         }
@@ -101,6 +104,7 @@ const profileUpdateUser = asyncHandler(async (req, res) => {
             name: updatedUser.name,
             email: updatedUser.email,
             isAdmin: updatedUser.isAdmin,
+            image: updatedUser.image,
             token: generateToken(updatedUser._id)
         })
     } else {
