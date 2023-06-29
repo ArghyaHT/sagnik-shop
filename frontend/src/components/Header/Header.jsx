@@ -17,6 +17,7 @@ const Header = () => {
 
   const [dropdown, setDropdown] = useState(false)
   const [cartdropdown, setCartdropdown] = useState(false)
+  const [admindropdown, setAdmindropdown] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -29,6 +30,7 @@ const Header = () => {
     dispatch(removeToCart(id))
   }
 
+  console.log(admindropdown)
   return (
     <>
     <div className='header'>
@@ -46,6 +48,7 @@ const Header = () => {
             </div>
 
             { cartdropdown && <div className='cart-dropdown'
+            
             onMouseEnter={() => setCartdropdown(true)}
             onMouseLeave={() => setCartdropdown(false)}
             >
@@ -74,7 +77,7 @@ const Header = () => {
                >{userInfo.name}</p>
 
                {
-                dropdown && ( <div className='dropdown'>
+                dropdown && ( <div className='dropdown' style={{right:userInfo.isAdmin ? "160px" : "30px"}}>
                 <p onClick={() => logoutHandler()}>Logout</p>
                 <Link to="/profile" className='link'>Profile</Link>
              </div>) 
@@ -82,6 +85,23 @@ const Header = () => {
             </div>) : ( <div>
               <Link to="/signin" style={{fontSize:"16px",textDecoration:"none",color:"black"}}>Sign-In</Link>
           </div>)
+           }
+
+           {
+            userInfo && userInfo.isAdmin && <div className='admin-dropdown-box'>
+              
+                <p onClick={() => setAdmindropdown(!admindropdown)}>Admin</p>
+
+                {
+                  admindropdown && <div className='admin-dropdown'>
+                  <Link to="/admin/userlist" className='admin-link'>Users</Link>
+                  <Link to="/admin/productlist" className='admin-link'>Products</Link>
+                  <Link to="/admin/orderlist" className='admin-link'>Orders</Link>
+                  </div>
+                }
+                
+               
+            </div>
            }
         </div>
     </div>

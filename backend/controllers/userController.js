@@ -41,7 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
         res.status(400)
         throw new Error("User already Exist")
     }
-    
+
     const createdUser = await User.create({ name, email, password })
     if (createdUser) {
         res.status(200)
@@ -87,30 +87,106 @@ const profileUser = asyncHandler(async (req, res) => {
 const profileUpdateUser = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id)
 
-    if(user){
-         user.name = req.body.name || user.name
-         user.email = req.body.email || user.email
-         if(req.body.password){
-            user.password = req.body.password 
-         }
+    if (user) {
+        user.name = req.body.name || user.name
+        user.email = req.body.email || user.email
+        if (req.body.password) {
+            user.password = req.body.password
+        }
 
-         const updatedUser = await user.save()
+        const updatedUser = await user.save()
 
-         res.status(200).json({
-             _id:updatedUser._id,
-             name:updatedUser.name,
-             email:updatedUser.email,
-             isAdmin:updatedUser.isAdmin,
-             token:generateToken(updatedUser._id)})
-    }else{
+        res.status(200).json({
+            _id: updatedUser._id,
+            name: updatedUser.name,
+            email: updatedUser.email,
+            isAdmin: updatedUser.isAdmin,
+            token: generateToken(updatedUser._id)
+        })
+    } else {
         throw new Error("Failed to Update User")
     }
-    
-   
-        
+})
 
-    
+// @desc: getAllUsers route
+// @route: GET
+// @access: private
+// @role: Admin
+
+
+const getAllUsers = asyncHandler(async (req, res) => {
+    const users = await User.find({})
+
+    if (users) {
+        res.status(201).json(users)
+    } else {
+        throw new Error("No users")
+    }
+})
+
+// @desc: deleteUser route
+// @route: DELETE
+// @access: private
+// @role: Admin
+
+
+const deleteUser = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id)
+
+    if (user) {
+        if (user.isAdmin) {
+            res.status(400).json("Admin User cannot be deleted")
+        } else {
+            await user.deleteOne({ _id: user._id })
+
+            res.json({ message: 'User removed' });
+        }
+    } else {
+        res.status(404);
+        throw new Error('User not found');
+    }
 
 })
 
-export { loginUser, registerUser, profileUser , profileUpdateUser}
+// @desc: updateUser route
+// @route: UPDATE
+// @access: private
+// @role: Admin
+
+const updateUser = asyncHandler(async(req,res) => {
+    const user = await User.findById(req.params.id).select('-password')
+
+    if(user){
+        user.name = req.body.name || user.name
+        user.email = req.body.email || user.email
+        user.isAdmin = Boolean(req.body.isAdmin)
+
+        const updatedUser = await user.save()
+
+        res.status(201).json({
+            _id:updatedUser._id,
+            name:updatedUser.name,
+            email:updatedUser.email,
+            isAdmin:updatedUser.isAdmin
+        })
+    }else{
+        throw new Error("User not found")
+    }
+})
+
+// @desc: getUserId route
+// @route: GET
+// @access: private
+// @role: Admin
+
+const getUserById = asyncHandler(async(req,res) => {
+    const user = await User.findById(req.params.id).select('-password')
+
+    if(user){
+        res.status(201).json(user)
+    }else{
+        throw new Error("User is not present")
+    }
+})
+
+export { loginUser, registerUser, profileUser, profileUpdateUser, getAllUsers, deleteUser ,updateUser,getUserById}

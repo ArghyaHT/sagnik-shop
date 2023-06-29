@@ -14,7 +14,20 @@ import {
     USER_UPDATE_REQUEST,
     USER_UPDATE_SUCCESS,
     USER_UPDATE_FAIL,
-    USER_UPDATE_RESET
+    USER_UPDATE_RESET,
+    ADMIN_USER_LIST_REQUEST,
+    ADMIN_USER_LIST_SUCCESS,
+    ADMIN_USER_LIST_FAIL,
+    ADMIN_USER_DELETE_REQUEST,
+    ADMIN_USER_DELETE_SUCCESS,
+    ADMIN_USER_DELETE_FAIL,
+    ADMIN_USER_LIST_RESET,
+    ADMIN_USER_ID_REQUEST,
+    ADMIN_USER_ID_SUCCESS,
+    ADMIN_USER_ID_FAIL,
+    ADMIN_USER_UPDATE_REQUEST,
+    ADMIN_USER_UPDATE_SUCCESS,
+    ADMIN_USER_UPDATE_FAIL
 } from "../constants/userConstants"
 
 export const userLoginAction = (email,password) => async(dispatch,getState) => {
@@ -45,6 +58,7 @@ export const userLogoutAction = () => (dispatch) => {
     dispatch({ type:USER_LOGOUT }) 
     dispatch({ type:USER_DETAILS_RESET})
     dispatch({ type:USER_UPDATE_RESET})
+    dispatch({ type:ADMIN_USER_LIST_RESET})
 }
 
 export const userRegisterAction = (name,email,password) => async(dispatch,getState) => {
@@ -127,3 +141,110 @@ export const userUpdateAction = (user) => async(dispatch,getState) => {
         })
     }
 }
+
+export const adminUseristAction = () => async(dispatch,getState) => {
+    try {
+        dispatch({type:ADMIN_USER_LIST_REQUEST})
+
+        const userToken = getState().userLogin.userInfo.token
+
+        const config = {
+            headers:{
+                Authorization: `Bearer ${userToken}`
+            }
+        }
+
+        const {data} = await axios.get("http://localhost:3000/api/user",config)
+
+        dispatch({
+            type:ADMIN_USER_LIST_SUCCESS,
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type:ADMIN_USER_LIST_FAIL,
+            payload:error.response && error.response.data.message ? error.response.data.message : error.response
+        })
+    }
+}
+
+export const adminUserdeleteAction = (id) => async(dispatch,getState) => {
+    try {
+        dispatch({type:ADMIN_USER_DELETE_REQUEST})
+
+        const userToken = getState().userLogin.userInfo.token
+
+        const config = {
+            headers:{
+                Authorization: `Bearer ${userToken}`
+            }
+        }
+
+        const {data} = await axios.delete(`http://localhost:3000/api/user/${id}`,config)
+
+        dispatch({
+            type:ADMIN_USER_DELETE_SUCCESS,
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type:ADMIN_USER_DELETE_FAIL,
+            payload:error.response && error.response.data.message ? error.response.data.message : error.response
+        })
+    }
+}
+
+
+export const adminGetUserIDAction = (id) => async(dispatch,getState) => {
+    try {
+        dispatch({type:ADMIN_USER_ID_REQUEST})
+
+        const userToken = getState().userLogin.userInfo.token
+
+        const config = {
+            headers:{
+                Authorization: `Bearer ${userToken}`
+            }
+        }
+
+        const {data} = await axios.get(`http://localhost:3000/api/user/${id}`,config)
+
+        dispatch({
+            type:ADMIN_USER_ID_SUCCESS,
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type:ADMIN_USER_ID_FAIL,
+            payload:error.response && error.response.data.message ? error.response.data.message : error.response
+        })
+    }
+}
+
+export const adminUserUpdateAction = (id,user) => async(dispatch,getState) => {
+    try {
+        dispatch({type:ADMIN_USER_UPDATE_REQUEST})
+
+        const userToken = getState().userLogin.userInfo.token
+
+        const config = {
+            headers:{
+                Authorization: `Bearer ${userToken}`
+            }
+        }
+
+        const {data} = await axios.put(`http://localhost:3000/api/user/${id}`,user,config)
+
+        dispatch({
+            type:ADMIN_USER_UPDATE_SUCCESS,
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type:ADMIN_USER_UPDATE_FAIL,
+            payload:error.response && error.response.data.message ? error.response.data.message : error.response
+        })
+    }
+}
+
+

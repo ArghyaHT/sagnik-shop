@@ -18,6 +18,8 @@ const Product = ({product}) => {
           <h2>${product.price}</h2>
         </div>
       </div>
+
+
     </>
   )
 }

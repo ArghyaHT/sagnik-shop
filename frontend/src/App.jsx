@@ -14,6 +14,11 @@ import Payment from './Screens/Payment/Payment'
 import PlaceOrder from './Screens/Placeorder/PlaceOrder'
 import OrderScreen from './Screens/OrderScreen/OrderScreen'
 import Demo from './Screens/Demo'
+import UserList from './Screens/admin/UserList/UserList'
+import UserEdit from './Screens/admin/UserEdit/UserEdit'
+import ProductList from './Screens/admin/ProductList/ProductList'
+import ProductCreate from './Screens/admin/ProductCreate/ProductCreate'
+import ProductEdit from './Screens/admin/ProductEdit/ProductEdit'
 
 const App = () => {
   return (
@@ -38,6 +43,14 @@ const App = () => {
           <Route path='/placeorder' element={<PlaceOrder/>}/>
           <Route path='/order/:id' element={<OrderScreen/>}/>
           <Route path='/demo' element={<Demo/>}/>
+
+          {/* admin-route starts */}
+          <Route path='/admin/userlist' element={<UserList/>}/>
+          <Route path='/admin/userlist/:id' element={<UserEdit/>}/>
+          <Route path='/admin/productlist' element={<ProductList/>}/>
+          <Route path='/admin/productlist/create' element={<ProductCreate/>}/>
+          <Route path='/admin/productlist/:id/edit' element={<ProductEdit/>}/>
+          {/* admin-route-ends */}
         </Routes>
       </div>
 

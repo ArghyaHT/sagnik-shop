@@ -128,3 +128,36 @@
     align-items: center;
     cursor: pointer;
 }
+
+.admin-dropdown{
+    width: 130px;
+    background-color: white;
+    color: color !important;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: absolute;
+    top: 60px;
+    right: 60px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 12px rgba(0,0,0,0.4);
+    z-index: 10;
+}
+
+.admin-link{
+    color: black;
+    background-color: rgba(0,0,0,0.1);
+    padding-block: 5px;
+    padding-inline: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.admin-dropdown-box p{
+    position: relative;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

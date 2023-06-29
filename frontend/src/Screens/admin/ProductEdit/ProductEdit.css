@@ -1,0 +1,54 @@
+.edit-product{
+    box-shadow: 0px 0px 6px rgba(0,0,0,0.6);
+    width: 500px;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 6px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.edit-product > div{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.edit-product > div input{
+    height: 35px;
+    padding-inline: 10px;
+}
+
+.error{
+    background-color: crimson;
+    color: white;
+    padding: 7px 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.success{
+    background-color: rgba(21, 255, 0, 0.273);
+    height: 45px;
+    border-radius: 6px;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+.success{
+    background-color: rgba(21, 255, 0, 0.273);
+    height: 45px;
+    border-radius: 6px;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    margin-top: 10px;
+}

@@ -1,0 +1,43 @@
+.admin-edit{
+    box-shadow: 0px 0px 6px rgba(0,0,0,0.5);
+    width: 400px;
+    margin: auto;
+    margin-top: 100px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.admin-edit >div{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.admin-edit > div input{
+    height: 35px;
+    padding: 0px 10px;
+}
+
+.check{
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+}
+
+.check input{
+    cursor: pointer;
+}
+
+.edit-scess{
+    background-color: rgba(21, 255, 0, 0.418);
+    height: 45px;
+    border-radius: 6px;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    margin-top: 10px;
+}

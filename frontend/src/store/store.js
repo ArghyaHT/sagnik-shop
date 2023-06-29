@@ -2,10 +2,14 @@ import { createStore, applyMiddleware, combineReducers } from "redux"
 import thunk from "redux-thunk"
 import {
     getProductsReducer,
-    getProductDetailReducer
+    getProductDetailReducer,
+    adminGetProductsReducer,
+    adminDeleteProductReducer,
+    adminCreateProductReducer,
+    adminEditProductReducer
 } from "../reducers/productReducer"
 import { cartReducer } from "../reducers/cartReducer";
-import { userLoginReducer, userRegisterReducer,userDetailsReducer,userUpdateReducer } from "../reducers/userReducer";
+import { userLoginReducer, userRegisterReducer,userDetailsReducer,userUpdateReducer ,adminUserListReducer,adminUserDeleteReducer,adminGetUserIDReducer,adminUserUpdateReducer} from "../reducers/userReducer";
 import { createOrderReducer , getOrderReducer,orderPayReducer,getAllOrdersReducer} from "../reducers/orderReducer";
 import { composeWithDevTools } from 'redux-devtools-extension';
 
@@ -20,7 +24,15 @@ const reducers = combineReducers({
     createOrder:createOrderReducer,
     getOrder:getOrderReducer,
     orderPay:orderPayReducer,
-    getAllOrders:getAllOrdersReducer
+    getAllOrders:getAllOrdersReducer,
+    adminUserList:adminUserListReducer,
+    adminUserDelete:adminUserDeleteReducer,
+    adminGetUserID:adminGetUserIDReducer,
+    adminUserUpdate:adminUserUpdateReducer,
+    adminGetProducts:adminGetProductsReducer,
+    adminDeleteProduct:adminDeleteProductReducer,
+    adminCreateProduct:adminCreateProductReducer,
+    adminEditProduct:adminEditProductReducer
 })
 
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
