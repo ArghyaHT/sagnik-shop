@@ -73,6 +73,7 @@ const editProductHandler = () => {
   return (
     <>
     <main className='edit-product'>
+        <h1>Edit Product</h1>
         <div>
             <label htmlFor="">Name</label>
             <input 
@@ -150,7 +151,7 @@ const editProductHandler = () => {
             />
         </div>
 
-        <button onClick={editProductHandler}>Create</button>
+        <button onClick={editProductHandler}>Update</button>
         { message && <p className='success'>{message}</p>}
     </main>
     </>

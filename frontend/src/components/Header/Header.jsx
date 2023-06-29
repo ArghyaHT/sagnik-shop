@@ -30,13 +30,13 @@ const Header = () => {
     dispatch(removeToCart(id))
   }
 
-  console.log(admindropdown)
   return (
     <>
     <div className='header'>
         <Link to="/" style={{fontSize:"20px",textDecoration:"none",color:"black"}}><p>Sagnik-Shop</p></Link>
 
         <div>
+          
             <div className='cart'
             onMouseEnter={() => setCartdropdown(true)}
             onMouseLeave={() => setCartdropdown(false)}

@@ -19,8 +19,10 @@ import UserEdit from './Screens/admin/UserEdit/UserEdit'
 import ProductList from './Screens/admin/ProductList/ProductList'
 import ProductCreate from './Screens/admin/ProductCreate/ProductCreate'
 import ProductEdit from './Screens/admin/ProductEdit/ProductEdit'
+import OrderList from './Screens/admin/OrderList/OrderList'
 
 const App = () => {
+
   return (
     <>
     <BrowserRouter>
@@ -50,11 +52,11 @@ const App = () => {
           <Route path='/admin/productlist' element={<ProductList/>}/>
           <Route path='/admin/productlist/create' element={<ProductCreate/>}/>
           <Route path='/admin/productlist/:id/edit' element={<ProductEdit/>}/>
+          <Route path='/admin/orderlist' element={<OrderList/>}/>
           {/* admin-route-ends */}
         </Routes>
       </div>
-
-      
+     
     </main>
     <Footer/>
     </BrowserRouter>

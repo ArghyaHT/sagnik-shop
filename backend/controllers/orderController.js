@@ -93,4 +93,38 @@ const getAllOrders = asyncHandler(async(req,res) => {
    }
 })
 
-export {createOrder,getOrderById,updateOrderToPaid,getAllOrders}
+
+// @desc: GET ALL ORDERS BY ADMIN
+// @route: GET
+// @access: PRIVATE
+
+const adminGetOrders = asyncHandler(async(req,res) => {
+  const orders = await Order.find({}).populate('user', 'id name')
+
+  if(orders){
+    res.status(201).json(orders)
+  }else{
+    throw new Error("No Orders found")
+  }
+})
+
+// @desc: UPDATE ORDER TO DELIVER BY ADMIN
+// @route: PUT
+// @access: PRIVATE
+
+const adminUpdateOrders = asyncHandler(async(req,res) => {
+  const order = await Order.findById(req.params.id)
+
+  if(order){
+    order.isDelivered = true,
+    order.deliveredAt = Date.now()
+    
+    const updatedOrder = await order.save()
+
+    res.status(201).json(updatedOrder)
+  }else{
+    throw new Error("Failed to Deliverd")
+  }
+})
+
+export {createOrder,getOrderById,updateOrderToPaid,getAllOrders,adminGetOrders,adminUpdateOrders}

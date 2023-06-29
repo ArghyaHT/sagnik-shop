@@ -6,8 +6,6 @@ const HomeScreen = () => {
     <>
     <main>
         <Home/>
-        <h1>Upload</h1>
-        <img src="../../uploads/image-1688035740417.jpg" alt="" />
     </main>
     </>
   )

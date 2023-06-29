@@ -6,11 +6,11 @@ import {
     adminGetProductsReducer,
     adminDeleteProductReducer,
     adminCreateProductReducer,
-    adminEditProductReducer
+    adminEditProductReducer,
 } from "../reducers/productReducer"
 import { cartReducer } from "../reducers/cartReducer";
 import { userLoginReducer, userRegisterReducer,userDetailsReducer,userUpdateReducer ,adminUserListReducer,adminUserDeleteReducer,adminGetUserIDReducer,adminUserUpdateReducer} from "../reducers/userReducer";
-import { createOrderReducer , getOrderReducer,orderPayReducer,getAllOrdersReducer} from "../reducers/orderReducer";
+import { createOrderReducer , getOrderReducer,orderPayReducer,getAllOrdersReducer,adminGetOrdersReducer,adminDeliverOrderReducer} from "../reducers/orderReducer";
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 const reducers = combineReducers({
@@ -32,7 +32,9 @@ const reducers = combineReducers({
     adminGetProducts:adminGetProductsReducer,
     adminDeleteProduct:adminDeleteProductReducer,
     adminCreateProduct:adminCreateProductReducer,
-    adminEditProduct:adminEditProductReducer
+    adminEditProduct:adminEditProductReducer,
+    adminGetOrders:adminGetOrdersReducer,
+    adminDeliverOrder:adminDeliverOrderReducer
 })
 
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
@@ -49,7 +51,8 @@ const initialState = {
     },
     userRegister:{
         userInfo:userInfoFromLocalStorage
-    }
+    },
+
 }
 
 const middleware = [thunk]

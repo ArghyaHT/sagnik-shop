@@ -18,7 +18,6 @@ const ProductList = () => {
   const adminDeleteProduct = useSelector(state => state.adminDeleteProduct)
   const { success:successdelete} = adminDeleteProduct
 
-  console.log(userInfo)
   const dispatch = useDispatch()
 
   useEffect(() => {

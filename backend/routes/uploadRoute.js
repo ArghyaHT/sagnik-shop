@@ -35,7 +35,12 @@ const upload = multer({
 })
 
 router.post('/', upload.single('image'), (req, res) => {
-  res.send(`/${req.file.path}`)
+  res.send(`http://localhost:3000/${req.file.path}`)
+  // console.log(req.file.path) 
+  // aikhane amar backend modhe uploads bole akta folder ache ai folder tar 
+  // modhe amr image uploads hoeche thikache akhane /uploads/filepath bole frontend pachena so
+  // amake tar age http://localhost:3000/uploads/req.file.path korle tokhno path paejache ata amr prochondo bhul hoechilo
+  // jodi ami proxy te bole ditam frontend e http://localhost:3000/ tale amake ata na dialo hoto jehutu ami proxy lagaini tai amake ai path ta bole dite hbe
 })
 
 export default router

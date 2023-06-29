@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./OrderScreen.css"
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { getOrderAction, payOrder } from '../../actions/orderAction'
+import { adminDeliverOrderAction, getOrderAction, payOrder } from '../../actions/orderAction'
 import Loader from '../../components/Loader'
 import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import axios from 'axios'
@@ -18,9 +18,17 @@ const OrderScreen = () => {
     const orderPay = useSelector(state => state.orderPay)
     const { loading: loadingPay, error: errorPay, success: successPay } = orderPay
 
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
+    const adminDeliverOrder = useSelector(state => state.adminDeliverOrder)
+    const { success: successDeliver } = adminDeliverOrder
+
     const dispatch = useDispatch()
 
     const [clientID, setClientID] = useState(null)
+
+    console.log(successDeliver)
 
     useEffect(() => {
 
@@ -38,11 +46,21 @@ const OrderScreen = () => {
 
         if (successPay) {
             dispatch(getOrderAction(orderId))
-        } else {
+        }else if(successDeliver){
+            dispatch(getOrderAction(orderId))
+        }else {
             dispatch(getOrderAction(orderId))
         }
+        
 
-    }, [dispatch, orderId, successPay])
+    }, [dispatch, orderId, successPay,successDeliver])
+
+
+    const  deliverHandler = () => {
+        if(window.confirm("Are You Sure ? ")){
+            dispatch(adminDeliverOrderAction(orderId))
+        }  
+    }
 
     return (
         <>
@@ -68,7 +86,7 @@ const OrderScreen = () => {
 
                         <div>
                             <h3>Order Items</h3>
-                            {!order.isDeliverd ? <p className='order-err'>Order is not Delivered</p> : <p className='order-sces'>Order has been delivered</p>}
+                            {!order.isDelivered ? <p className='order-err'>Order is not Delivered</p> : <p className='order-sces'>Order has been delivered</p>}
                             {
                                 order && order.orderItems && (
                                     order.orderItems.map((item) => {
@@ -153,6 +171,13 @@ const OrderScreen = () => {
                             </PayPalScriptProvider>
                         }
 
+                        {
+                            userInfo && userInfo.isAdmin && <button 
+                            onClick={deliverHandler}
+                            disabled={successDeliver}
+                            style={{cursor: successDeliver && "none" }}
+                            >Mark As Delivered</button>
+                        }
                     </div>
                 </main>
             }
