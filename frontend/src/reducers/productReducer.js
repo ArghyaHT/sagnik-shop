@@ -30,7 +30,8 @@ export const getProductsReducer = (state = { products: [], loading: false, error
         case GET_ALL_PRODUCTS_REQUEST:
             return { loading: true }
         case GET_ALL_PRODUCTS_SUCCESS:
-            return { loading: false, products: action.payload }
+            return { loading: false, products: action.payload.products 
+                , pages: action.payload.pages , pageNumber: action.payload.pageNumber}
         case GET_ALL_PRODUCTS_FAIL:
             return { loading: false, error: action.payload }
         default:

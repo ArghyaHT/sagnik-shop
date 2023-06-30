@@ -116,7 +116,7 @@ const ProductScreen = () => {
         }
         </div>
        
-
+        <div className='sale'>
         <div className='review-form'>
           <p>Write a Customer Review</p>
 
@@ -151,6 +151,14 @@ const ProductScreen = () => {
             >Submit</button>
 
         </div>
+
+        <div className='sale-box'>
+          <img src="https://img.freepik.com/premium-vector/mega-sale-discount-banner-set-promotion-with-yellow-background_497837-702.jpg?w=2000"  alt="" />
+        </div>
+        </div>
+       
+
+        
       </main>
     </>
   )

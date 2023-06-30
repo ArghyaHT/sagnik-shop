@@ -22,11 +22,11 @@ import {
 } from "../constants/productConstants"
 import axios from 'axios'
 
-export const getProductsAction = (keyword = '') => async (dispatch) => {
+export const getProductsAction = (keyword = '',pageNumber = '') => async (dispatch) => {
     dispatch({ type: GET_ALL_PRODUCTS_REQUEST })
 
     try {
-        const { data } = await axios.get(`http://localhost:3000/api/product?keyword=${keyword}`)
+        const { data } = await axios.get(`http://localhost:3000/api/product?keyword=${keyword}&pageNumber=${pageNumber}`)
 
         dispatch({
             type: GET_ALL_PRODUCTS_SUCCESS,
@@ -74,7 +74,7 @@ export const adminGetProuctsAction = () => async(dispatch,getState) => {
             }
         }
         
-        const {data} = await axios.get(`http://localhost:3000/api/product`,config)
+        const {data} = await axios.get(`http://localhost:3000/api/product/admin/get`,config)
 
         dispatch({type:GET_ADMIN_ALL_PRODUCTS_SUCCESS,payload:data})
     } catch (error) {

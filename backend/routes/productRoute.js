@@ -9,7 +9,9 @@ router.route("/:id/review").post(protect,createReviewProduct)
 
 // i dont know why my middleware is not working only in adminGetAllProducts
 //Admin
-router.route("/").get(protect,admin,adminGetAllProducts)
+//solve hoehche route name problem hochilo otake change koredile thik hoejabe jamon
+//niche ami korechi
+router.route("/admin/get").get(protect,admin,adminGetAllProducts)
 router.route("/").post(protect,admin,adminCreateProduct)
 router.route("/:id").put(protect,admin,adminUpdateProduct)
 router.route("/:id").delete(protect,admin,adminDeleteProductById)

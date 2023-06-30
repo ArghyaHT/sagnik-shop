@@ -34,7 +34,7 @@ const Header = () => {
   return (
     <>
       <div className='header'>
-        <Link to="/" style={{ fontSize: "20px", textDecoration: "none", color: "black" }}><p>Sagnik-Shop</p></Link>
+        <Link to="/" style={{ fontSize: "20px", textDecoration: "none", color: "black"}}><img  width ="80px" src='https://t3.ftcdn.net/jpg/02/45/84/16/360_F_245841615_d7QzRv937jfiC176rmKK60ckNXU9V76z.jpg' style={{mixBlendMode:"darken"}}/></Link>
         <SearchBox/>
         <div>
 

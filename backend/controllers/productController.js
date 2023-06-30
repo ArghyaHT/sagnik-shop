@@ -7,6 +7,9 @@ import Product from "../Models/productModel.js"
 
 const getAllProducts = asyncHandler(async(req,res) => {
 
+    const productsPerPage = 4 ; //random value means how many products i want to show per page 
+    const pageNumber = Number(req.query.pageNumber) || 1 //if pageNumber not present then by default page One 
+
     const keyword = req.query.keyword
     ? {
         name: {
@@ -15,10 +18,15 @@ const getAllProducts = asyncHandler(async(req,res) => {
         },
       }
     : {};
-
-    const products = await Product.find({...keyword})
+    //count is a method 
+    const count = await Product.countDocuments({...keyword})
+    const products = await Product.find({...keyword}).limit(productsPerPage).skip(productsPerPage * (pageNumber - 1))
+    // if we are in page one then we will get 2 products.
+    //Then if we go to page 2 then which products will i show
+    //for that we use skip method 
+    // pages mane amr current page bad dia arkoto gulo page ache seta bolche
     if(products){
-        res.json(products)
+        res.json({products, pageNumber, pages: Math.ceil(count/productsPerPage)})
     }else{
         throw new Error("No Products Available")
     }
@@ -46,7 +54,7 @@ const getSingleProduct = asyncHandler(async(req,res) => {
 // @access: Private
 
 const adminGetAllProducts = asyncHandler(async(req,res) => {
-    const products = await Product.find({})
+    const products = await Product.find()
 
     if(products){
         res.status(201).json(products)
