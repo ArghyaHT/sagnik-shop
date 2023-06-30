@@ -10,6 +10,10 @@ import {
     ADMIN_EDIT_PRODUCT_REQUEST,
     ADMIN_EDIT_PRODUCT_RESET,
     ADMIN_EDIT_PRODUCT_SUCCESS,
+    CREATE_PRODUCT_REVIEW_FAIL,
+    CREATE_PRODUCT_REVIEW_REQUEST,
+    CREATE_PRODUCT_REVIEW_RESET,
+    CREATE_PRODUCT_REVIEW_SUCCESS,
     GET_ADMIN_ALL_PRODUCTS_FAIL,
     GET_ADMIN_ALL_PRODUCTS_REQUEST,
     GET_ADMIN_ALL_PRODUCTS_SUCCESS,
@@ -98,6 +102,21 @@ export const adminEditProductReducer = (state = {success:false},action) => {
         case ADMIN_EDIT_PRODUCT_FAIL:
             return { loading:false, error:action.payload}
         case ADMIN_EDIT_PRODUCT_RESET:
+            return {}
+        default:
+            return state
+    }
+}
+
+export const createProductReviewReducer = (state = {},action) => {
+    switch(action.type){
+        case CREATE_PRODUCT_REVIEW_REQUEST:
+            return { loading:true }
+        case CREATE_PRODUCT_REVIEW_SUCCESS:
+            return { loading:false, review:action.payload}
+        case CREATE_PRODUCT_REVIEW_FAIL:
+            return { loading:false, error:action.payload}
+        case CREATE_PRODUCT_REVIEW_RESET:
             return {}
         default:
             return state

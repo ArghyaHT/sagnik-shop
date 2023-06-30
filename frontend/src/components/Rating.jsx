@@ -24,8 +24,6 @@ const Rating = ({value}) => {
         <span>
            {value >= 5 ? <BsStarFill/> : value >= 4.5 ? <BsStarHalf/> : <BsStar/>}
         </span>
-        
-        <p>{value}</p>
     </div>
     </>
   )

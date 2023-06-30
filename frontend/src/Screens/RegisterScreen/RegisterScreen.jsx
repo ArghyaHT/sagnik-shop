@@ -124,7 +124,7 @@ const RegisterScreen = () => {
                         />
                     </div>
 
-                    <button onClick={submitHandler}>Sign In</button>
+                    <button onClick={submitHandler}>Sign Up</button>
                     <p>Already have and account ? <Link to="/signin">
                         Login
                     </Link></p>

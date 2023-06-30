@@ -4,17 +4,21 @@ import Product from '../Product/Product'
 import Loader from '../Loader'
 import {useSelector,useDispatch} from "react-redux"
 import { getProductsAction } from '../../actions/productActions'
+import { useParams } from 'react-router-dom'
 
 const Home = () => {
- 
+    
+    const { keyword } = useParams()
+    console.log(keyword)
+
     const getProducts = useSelector(state => state.getProducts)
     const {products,loading,error} = getProducts
 
     const dispatch = useDispatch()
     
     useEffect(() => {
-        dispatch(getProductsAction())
-    },[dispatch])
+        dispatch(getProductsAction(keyword))
+    },[dispatch,keyword])
     return (
         <main className='home'>
             {loading && <Loader/>}

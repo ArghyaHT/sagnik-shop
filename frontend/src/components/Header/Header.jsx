@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import "./Header.css"
-import { Link } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { userLogoutAction } from '../../actions/userAction'
 import { FaShoppingCart } from 'react-icons/fa'
 import { AiFillDelete } from "react-icons/ai"
 import { removeToCart } from '../../actions/cartAction'
+import SearchBox from '../SearchBox/SearchBox'
 
 const Header = () => {
 
@@ -34,7 +35,7 @@ const Header = () => {
     <>
       <div className='header'>
         <Link to="/" style={{ fontSize: "20px", textDecoration: "none", color: "black" }}><p>Sagnik-Shop</p></Link>
-
+        <SearchBox/>
         <div>
 
           <div className='cart'

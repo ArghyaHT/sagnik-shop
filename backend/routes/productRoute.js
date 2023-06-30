@@ -1,10 +1,11 @@
 import express from "express";
-import { adminCreateProduct, adminDeleteProductById, adminGetAllProducts, adminUpdateProduct, getAllProducts, getSingleProduct } from "../controllers/productController.js";
+import { adminCreateProduct, adminDeleteProductById, adminGetAllProducts, adminUpdateProduct, createReviewProduct, getAllProducts, getSingleProduct } from "../controllers/productController.js";
 import { admin, protect } from "../middleware/authMiddleware.js"
 const router = express.Router()
 
 router.route("/").get(getAllProducts)
 router.route("/:id").get(getSingleProduct)
+router.route("/:id/review").post(protect,createReviewProduct)
 
 // i dont know why my middleware is not working only in adminGetAllProducts
 //Admin

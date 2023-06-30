@@ -8,6 +8,9 @@ import {
     ADMIN_EDIT_PRODUCT_FAIL,
     ADMIN_EDIT_PRODUCT_REQUEST,
     ADMIN_EDIT_PRODUCT_SUCCESS,
+    CREATE_PRODUCT_REVIEW_FAIL,
+    CREATE_PRODUCT_REVIEW_REQUEST,
+    CREATE_PRODUCT_REVIEW_SUCCESS,
     GET_ADMIN_ALL_PRODUCTS_FAIL,
     GET_ADMIN_ALL_PRODUCTS_REQUEST,
     GET_ADMIN_ALL_PRODUCTS_SUCCESS,
@@ -19,11 +22,11 @@ import {
 } from "../constants/productConstants"
 import axios from 'axios'
 
-export const getProductsAction = () => async (dispatch) => {
+export const getProductsAction = (keyword = '') => async (dispatch) => {
     dispatch({ type: GET_ALL_PRODUCTS_REQUEST })
 
     try {
-        const { data } = await axios.get("http://localhost:3000/api/product")
+        const { data } = await axios.get(`http://localhost:3000/api/product?keyword=${keyword}`)
 
         dispatch({
             type: GET_ALL_PRODUCTS_SUCCESS,
@@ -155,6 +158,32 @@ export const adminEditProductAction = (id,product) => async(dispatch,getState) =
     } catch (error) {
         dispatch({
             type:ADMIN_EDIT_PRODUCT_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.response
+        })
+    }
+}
+
+
+export const createProductReviewAction = (productId,review) => async(dispatch,getState) => {
+    try {
+        dispatch({type:CREATE_PRODUCT_REVIEW_REQUEST})
+
+        const userToken = getState().userLogin.userInfo.token
+
+        const config = {
+            headers:{
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${userToken}`
+            }
+        }
+        
+        const {data} = await axios.post(`http://localhost:3000/api/product/${productId}/review`,review,config)
+
+        dispatch({type:CREATE_PRODUCT_REVIEW_SUCCESS,payload:data})
+        
+    } catch (error) {
+        dispatch({
+            type:CREATE_PRODUCT_REVIEW_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message : error.response
         })
     }
