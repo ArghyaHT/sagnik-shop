@@ -1,11 +1,15 @@
 .search-box{
-margin-left: -450px;
+margin-left: -350px;
 }
 .search-box > input{
     height: 35px;
     width: 180px;
     padding-inline: 10px;
     border: none;
+}
+.search-box > input:focus{
+    border:none;
+    outline: none;
 }
 
 .search-box button{

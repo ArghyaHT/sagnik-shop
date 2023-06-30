@@ -1,0 +1,17 @@
+.carousel{
+    margin-top: 10px;
+    height: 50vh;
+    background-size: cover !important;
+    background-position: center !important;
+    border-radius: 6px;
+    width: 100%;
+}
+
+.carousel-box{
+    height: 50vh;
+}
+
+.img-box img{
+    background-size: cover !important;
+    background-position: center !important;
+}

@@ -19,14 +19,17 @@ import {
     GET_ALL_PRODUCTS_SUCCESS,
     GET_PRODUCT_DETAIL_REQUEST,
     GET_PRODUCT_DETAIL_SUCCESS,
+    GET_TOP_PRODUCTS_FAIL,
+    GET_TOP_PRODUCTS_SUCCESS,
+    GET_TOP_PRODUCTS_REQUEST
 } from "../constants/productConstants"
 import axios from 'axios'
 
-export const getProductsAction = (keyword = '') => async (dispatch) => {
+export const getProductsAction = (keyword = '',pageNumber = '') => async (dispatch) => {
     dispatch({ type: GET_ALL_PRODUCTS_REQUEST })
 
     try {
-        const { data } = await axios.get(`http://localhost:3000/api/product?keyword=${keyword}`)
+        const { data } = await axios.get(`http://localhost:3000/api/product?keyword=${keyword}&pageNumber=${pageNumber}`)
 
         dispatch({
             type: GET_ALL_PRODUCTS_SUCCESS,
@@ -186,5 +189,26 @@ export const createProductReviewAction = (productId,review) => async(dispatch,ge
             type:CREATE_PRODUCT_REVIEW_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message : error.response
         })
+    }
+}
+
+
+export const getTopProductAction = () => async (dispatch) => {
+    dispatch({ type: GET_TOP_PRODUCTS_REQUEST })
+
+    try {
+        const { data } = await axios.get(`http://localhost:3000/api/product/top`)
+
+        dispatch({
+            type: GET_TOP_PRODUCTS_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_TOP_PRODUCTS_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.response
+        })
+
+        console.log(error)
     }
 }
