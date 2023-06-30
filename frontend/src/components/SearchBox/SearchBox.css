@@ -1,5 +1,5 @@
 .search-box{
-margin-left: -450px;
+margin-left: -350px;
 }
 .search-box > input{
     height: 35px;
@@ -8,6 +8,9 @@ margin-left: -450px;
     border: none;
 }
 
+.search-box > input:focus{
+    outline: none;
+}
 .search-box button{
     background-color: green;
     width: 80px;
