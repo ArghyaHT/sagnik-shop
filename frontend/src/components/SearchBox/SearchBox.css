@@ -1,0 +1,21 @@
+.search-box{
+margin-left: -350px;
+}
+.search-box > input{
+    height: 35px;
+    width: 180px;
+    padding-inline: 10px;
+    border: none;
+}
+
+.search-box > input:focus{
+    outline: none;
+}
+.search-box button{
+    background-color: green;
+    width: 80px;
+    border-radius: 0px !important;
+    color: white;
+    margin-left: -60px;
+    border: none;
+}

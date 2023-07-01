@@ -1,0 +1,98 @@
+.order{
+    padding-block: 30px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+}
+
+.left{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.left > div{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    border-bottom: 1px solid gray;
+    padding-bottom: 20px;
+}
+
+.left > div:nth-child(4){
+    margin-top: 20px;
+}
+
+.left > div:nth-child(4) > div{
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.left > div:nth-child(4) > div > div{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.left > div:nth-child(4) > div > div > div{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.left > div:nth-child(4) > div > div > div img{
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+.right{
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 6px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    height: 450px;    
+}
+
+.right div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 1rem;
+}
+
+.right button{
+    margin-top: 30px;
+}
+
+.paypal{
+    border: none !important;
+}
+
+.order-err{
+    background-color: rgba(255, 0, 0, 0.418);
+    height: 45px;
+    border-radius: 6px;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+.order-sces{
+    background-color: rgba(21, 255, 0, 0.418);
+    height: 45px;
+    border-radius: 6px;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    margin-top: 10px;
+}
